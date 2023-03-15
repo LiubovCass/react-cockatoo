@@ -1,5 +1,5 @@
 import React from "react";
-import InputWithLabel from "./InputWithLabel.js";
+import InputWithLabel from "./InputWithLabel";
 
 // update props to use destructuring
 const AddTodoForm = ({ onAddTodo }) => {
@@ -12,6 +12,7 @@ const AddTodoForm = ({ onAddTodo }) => {
     // retrieve the input value from the event object and store in variable named newTodoTitle
 
     let newTodoTitle = event.target.value;
+    console.log(newTodoTitle);
     // call the state setter setTodoTitle and pass newTodoTitle
     setTodoTitle(newTodoTitle);
   }
@@ -41,12 +42,11 @@ const AddTodoForm = ({ onAddTodo }) => {
     <form onSubmit={handleAddTodo}>
       <InputWithLabel
         todoTitle={todoTitle}
-        // isFocused
         handleTitleChange={handleTitleChange}
+        children
       >
-        Title
+        <label htmlFor="todoTitle">Title</label>
       </InputWithLabel>
-
       <button type="submit">Add</button>
     </form>
   );

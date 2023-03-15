@@ -1,26 +1,53 @@
 import React from "react";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
+// import react from "react";
 
 // create custom hook
-function useSemiPersistentState() {
-  // Create new state variable named todoTitle with setter setTodoTitle
-  const [todoList, setTodoList] = React.useState(
-    JSON.parse(localStorage.getItem("savedTodoList")) || []
-  );
+// function useSemiPersistentState() {
+//   // Create new state variable named todoTitle with setter setTodoTitle
+//   const [todoList, setTodoList] = React.useState(
+//     JSON.parse(localStorage.getItem("savedTodoList")) || []
+//   );
 
-  // Define a useEffect React hook with todoList as a dependency
-  // Inside the side-effect handler function, save the todoList inside localStorage with the key "savedTodoList"
-  // convert todoList to a string before saving in localStorage
-  React.useEffect(() => {
-    localStorage.setItem("savedTodoList", JSON.stringify(todoList));
-  }, [todoList]);
+//   // Define a useEffect React hook with todoList as a dependency
+//   // Inside the side-effect handler function, save the todoList inside localStorage with the key "savedTodoList"
+//   // convert todoList to a string before saving in localStorage
+//   React.useEffect(() => {
+//     localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+//   }, [todoList]);
 
-  return [todoList, setTodoList];
-}
+//   return [todoList, setTodoList];
+// }
 
 function App() {
-  const [todoList, setTodoList] = useSemiPersistentState("");
+  const [todoList, setTodoList] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  React.useEffect(() => {
+    new Promise((resolve, reject) => {
+      setTimeout(
+        () =>
+          resolve({
+            data: {
+              todoList: JSON.parse(localStorage.getItem("savedTodoList")) || [],
+            },
+          }),
+        2000
+      );
+    }).then((result) => {
+      setTodoList(result.data.todoList);
+      setIsLoading(false);
+    });
+  }, []);
+  React.useEffect(() => {
+    if (isLoading === false) {
+      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+    }
+  }, [todoList, isLoading]);
+
+  // const [todoList, setTodoList] = useSemiPersistentState("");
+  // const [newTodo, setNewTodo] = React.useState("");
+  // react.useEffect(() => {});
 
   // Remove the newTodo state variable and the corresponding JSX that displays it
 
@@ -33,13 +60,11 @@ function App() {
   function addTodo(newTodo) {
     setTodoList([...todoList, newTodo]);
   }
-  // Define a new handler function named removeTodo with parameter id, remove the item with the given id from todoList
-  // with methods
-  //  Call the setTodoList state setter and pass the new or modified Array
   const removeTodo = (id) => {
-    const filterTodoList = todoList.filter((todo) => todo.id !== id);
-    setTodoList(filterTodoList);
+    const newTodoList = todoList.filter((todo) => todo.id !== id);
+    setTodoList(newTodoList);
   };
+
   return (
     <>
       <h1>Todo List</h1>
@@ -50,12 +75,12 @@ function App() {
       {/* Pass setNewTodo as a callback handler prop named onAddTodo to the AddTodoForm component */}
 
       {/* Pass todoList state as a prop named todoList to the TodoList component */}
-      {/* <TodoList todoList={todoList} /> */}
 
-      {/* Below the <AddTodoForm /> component, add a paragraph element that displays the value of newTodo variable */}
-      {/* Pass removeTodo as a callback handler prop named onRemoveTodo to the TodoList component */}
-
-      <TodoList onRemoveTodo={removeTodo} todoList={todoList} />
+      {isLoading === true ? (
+        <p>Loading...</p>
+      ) : (
+        <TodoList onRemoveTodo={removeTodo} todoList={todoList} />
+      )}
     </>
   );
 }

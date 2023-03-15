@@ -4,12 +4,11 @@ import React from "react";
 const TodoListItem = ({ id, onRemoveTodo, title }) => {
   return (
     <>
-      <li key={id}>
+      <li>
         {title}
         <button type="button" onClick={() => onRemoveTodo(id)}>
           Remove
         </button>
-        {/* Add an onClick prop to the button element and pass a function that calls onRemoveTodo from props with the current item id as an argument */}
       </li>
     </>
   );
