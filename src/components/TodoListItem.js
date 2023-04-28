@@ -5,13 +5,17 @@ import { FaTrashAlt } from "react-icons/fa";
 import PropTypes from "prop-types";
 
 // update props to use destructuring
-const TodoListItem = ({ id, onRemoveTodo, title }) => {
+const TodoListItem = ({ id, onRemoveTodo, title, todo }) => {
   return (
     <>
       {/* <div className={style.todoListWithBtn}> */}
       {/* <ul className={style.todoListItemContainer}> */}
+
       <ul>
-        <li className={style.listItem}>{title}</li>
+        <li className={style.listItem}>
+          {title} <br />
+          <span>{todo.createdTime}</span>
+        </li>
         <button
           className={style.removeButton}
           type="button"
@@ -28,7 +32,7 @@ const TodoListItem = ({ id, onRemoveTodo, title }) => {
 TodoListItem.propTypes = {
   id: PropTypes.string,
   onRemoveTodo: PropTypes.func,
-  title: PropTypes.object,
+  title: PropTypes.string,
 };
 
 export default TodoListItem;

@@ -5,31 +5,34 @@ import PropTypes from "prop-types";
 
 //Create Reusable Input with Label Component
 
-function InputWithLabel(props) {
+function InputWithLabel({ todoTitle, handleTitleChange, children }) {
   //input element is re-focused automatically!!!
   const inputRef = useRef();
   useEffect(() => {
     inputRef.current.focus();
   });
+  // console.log(children);
+
   return (
     <>
-      <label htmlFor="todoTitle">{props.children}</label>
+      <label htmlFor="todoTitle">{children}</label>
       <input
         ref={inputRef}
         id="todoTitle"
         name="title"
         type="text"
         placeholder="new todo"
-        value={props.todoTitle}
-        onChange={props.handleTitleChange}
+        value={todoTitle}
+        onChange={handleTitleChange}
       ></input>
     </>
   );
 }
 InputWithLabel.propTypes = {
   handleTitleChange: PropTypes.func,
-  todoTitle: PropTypes.object,
+  todoTitle: PropTypes.string,
   children: PropTypes.bool,
+  // children: PropTypes.node.isRequired,
 };
 
 export default InputWithLabel;
