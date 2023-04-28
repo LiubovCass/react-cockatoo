@@ -2,16 +2,15 @@ import { React, useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 // import AskGoogle from ".//pages/AskGoogle";
 import TodoContainer from "./components/TodoContainer";
-import MyNewToDoList from ".//pages/MyNewToDoList";
+// import MyNewToDoList from ".//pages/MyNewToDoList";
 import Toggle from ".//components/Toggle.js";
 
 import style from "./components/TodoListItem.module.css";
 
-const tableName = "Grocery";
-// const arrayTableNames = tableNames.map((tableName) => <div>{tableName}</div>);
-
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const tableName = { table1: "My todo", table2: "Grocery", table3: "Work" };
+  // const arrayTableNames = tableNames.map((tableName) => <div>{tableName}</div>);
 
   return (
     <>
@@ -19,30 +18,39 @@ function App() {
         <BrowserRouter>
           <div className={style.navbar}>
             <div className={style.navbar_links}>
-              <Link to="/home">{tableName}</Link>
-              <Link to="/grocery">{tableName}</Link>
-              <Link to="/work">{tableName}</Link>
+              <Link to="/">{tableName.table1}</Link>
+              <Link to="/grocery">{tableName.table2}</Link>
+              <Link to="/work">{tableName.table3}</Link>
             </div>
             <Toggle onSwitch={setIsDarkMode} />
           </div>
 
           <Routes>
             <Route
-              path="/home"
+              path="/"
               element={
-                <TodoContainer tableName={tableName} isDarkMode={isDarkMode} />
+                <TodoContainer
+                  tableName={tableName.table1}
+                  isDarkMode={isDarkMode}
+                />
               }
             ></Route>
             <Route
               path="/grocery"
               element={
-                <TodoContainer tableName={tableName} isDarkMode={isDarkMode} />
+                <TodoContainer
+                  tableName={tableName.table2}
+                  isDarkMode={isDarkMode}
+                />
               }
             ></Route>
             <Route
               path="/work"
               element={
-                <TodoContainer tableName={tableName} isDarkMode={isDarkMode} />
+                <TodoContainer
+                  tableName={tableName.table3}
+                  isDarkMode={isDarkMode}
+                />
               }
             ></Route>
           </Routes>

@@ -18,6 +18,7 @@ function TodoList({ onRemoveTodo, todoList }) {
               key={todo.id}
               title={todo.fields.Title}
               id={todo.id}
+              todo={todo}
             />
           );
         })
