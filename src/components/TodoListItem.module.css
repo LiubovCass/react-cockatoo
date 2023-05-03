@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Fuzzy+Bubbles&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
 /* @import {FontAwesomeIcon} from "@fontawesome/react-fontawesome"; */
 
 /* .dark {
@@ -15,41 +18,53 @@
   /* background-color: #8c8c8c; */
 
   /* background-color: var(--background-color); */
-  font-family: "Fredericka the Great";
-  font-weight: lighter;
+  /* font-family: "Fredericka the Great"; */
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  color: #252832;
+  /* color: #4d4d4d; */
 }
 
 .toggle-button {
-  width: 150px;
-  background-color: var(--background-color);
+  width: fit-content;
+  /* background-color: var(--background-color); */
+  background-color: transparent;
   color: var(--color);
+  border-color: transparent;
 }
 
 .dark-theme {
+  /* --color: #fbfbfd; */
   --color: #fbfbfd;
-  --background-color: #161617;
-  --link-color: pink;
+  /* --background-color: #161617; */
+  --background-color: #333;
+  /* --link-color: pink; */
   /* color: #fff;
   background-color: #333; */
 }
 
 .light-theme {
-  --color: (29, 29, 31);
+  --color: #252832;
+  /* --color: (29, 29, 31); */
   --background-color: #fbfbfd;
-  --link-color: blue;
+  /* --background-color: #ffff; */
+  --link-color: purple;
   /* color: #333;
   background-color: #fff; */
 }
 
-a:link {
+/* a:link {
   color: var(--link-color);
-}
+} */
 
 body {
-  background-color: (255, 255, 255);
+  /* background-color: #333; */
+  background-color: #e8e2d9;
+
+  /* background-color: (255, 255, 255); */
   /* background-color: #8c8c8c; */
   /* background-color: var(--background-color); */
 }
@@ -62,7 +77,7 @@ body {
   flex: 1;
 
   justify-content: center;
-  gap: 40px;
+  gap: 30px;
   position: relative;
   flex-direction: row;
   /* text-align: center; */
@@ -73,28 +88,31 @@ body {
   margin-right: auto; */
   margin: 20px auto 0;
   /* margin-inline: auto; */
-  padding: 2rem;
+  padding: 1rem;
   /* padding-right: 2rem; */
   border-radius: 18px;
   /* border: 5px solid #bfbfbf; */
-  width: min(90%, 40rem);
-  /* max-width: 40rem; */
+  width: min(90%, 50rem);
+  /* max-width: 50rem; */
   /* height: auto; */
   min-height: 30rem;
   /* max-height: fit-content; */
   box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.8);
   /* overflow: hidden; */
+  margin-bottom: 1rem;
 }
 
 .navbar {
   background-color: transparent;
   height: 5rem;
   /* color: #262626; */
-  color: var(--color);
+  /* color: var(--color); */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   text-decoration: none;
+  /* position: fixed; */
+  /* z-index: 50; */
   /* width: min(90%, 40rem); */
 }
 .navbar_links {
@@ -108,8 +126,10 @@ body {
 
 a {
   /* color: #f2f2f2; */
-  color: var(--link-color);
+  /* color: var(--link-color); */
+  color: #252832;
   font-size: 1.5rem;
+  font-weight: 400;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -118,7 +138,7 @@ a {
   padding: 5px 10px;
 }
 a:hover {
-  color: #262626;
+  color: #54596b;
   transition: all 0.3s ease;
 }
 
@@ -127,6 +147,7 @@ a:hover {
   /* width: 100%; */
   text-align: center;
   padding: 1rem 0;
+
   flex-direction: column;
   display: flex;
   align-items: center;
@@ -141,7 +162,7 @@ a:hover {
 }
 h1 {
   font-size: 3rem;
-  font-weight: lighter;
+  font-weight: 600;
   justify-content: center;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -152,6 +173,8 @@ h1 {
   margin-inline: auto;
   margin-top: 1rem;
   margin-bottom: 1 rem;
+}
+h3 {
   color: var(--color);
 }
 
@@ -189,6 +212,7 @@ form {
   /* background-color: #bfbfbf; */
   /* background-color: transparent; */
   border: 1px solid #bdbdbd;
+
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   /* border-radius: 0.25rem; */
@@ -213,16 +237,17 @@ input {
   display: block;
   width: 100%;
   /* height: calc(1.5rem + 2px); */
-  padding-inline: 0.375rem;
+  padding-inline: 0.5rem;
+
   font-size: 1rem;
   font-weight: lighter;
-  font-family: "Fredericka the Great";
+  /* font-family: "Fredericka the Great"; */
   line-height: 1;
   color: #212529;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #bdbdbd;
-  border-radius: 0.25rem;
+  border-radius: 30px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   /* color: #262626;
   background-color: #f2f2f2;
@@ -253,7 +278,26 @@ input:focus {
   width: 100%;
   color: #262626;
 }
-
+.selectGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  /* padding-inline: auto; */
+  gap: 10px;
+}
+.selectGroup label {
+  margin-right: 0;
+}
+.todoListItemContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
 .todoListWithBtn {
   /* border: 2px solid purple; */
   display: flex;
@@ -264,7 +308,7 @@ input:focus {
   align-items: center;
   /* justify-content: flex-start; */
   /* width: min(90%, 30rem); */
-  width: min(90%, 30rem);
+  /* width: min(90%, 100rem); */
 
   width: 100%;
   /* max-width: 30rem; */
@@ -280,12 +324,59 @@ input:focus {
 .todoListWithBtn ul {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   /* border: 2px solid black; */
   align-items: center;
   width: 100%;
   width: min(90%, 30rem);
-  margin-bottom: 5px;
+  margin-bottom: 1rem;
   /* line-height: 1.5; */
+}
+
+/* .todoListWithBtn input {
+  width: fit-content;
+} */
+.checkbox_wrapper .round {
+  position: relative;
+}
+
+.checkbox_wrapper .round label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  display: block;
+}
+
+.checkbox_wrapper .round label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 6px;
+  left: 8px;
+  opacity: 0;
+  position: absolute;
+  top: 9px;
+  transform: rotate(-45deg);
+  width: 12px;
+}
+
+.checkbox_wrapper .round input[type="checkbox"] {
+  visibility: hidden;
+  display: none;
+  opacity: 0;
+}
+
+.checkbox_wrapper .round input[type="checkbox"]:checked + label {
+  background-color: #66bb6a;
+  border-color: #66bb6a;
+}
+
+.checkbox_wrapper .round input[type="checkbox"]:checked + label:after {
+  opacity: 1;
 }
 
 /* .todoList {
@@ -318,7 +409,7 @@ p {
   /* justify-content: center; */
   /* font-weight: 400; */
   line-height: 1.5;
-  color: #262626;
+  color: #252832;
   /* text-align: right; */
   /* vertical-align: middle; */
   /* cursor: pointer;
@@ -327,7 +418,7 @@ p {
   user-select: none; */
   /* background-color: #bfbfbf; */
   /* border: 1px solid #bdbdbd; */
-  padding: 0.375rem 0.75rem;
+  /* padding: 0.375rem 0.75rem; */
   font-size: 1rem;
   /* border-radius: 0.25rem; */
   /* transition: background-color 0.15s ease-in-out; */
@@ -336,39 +427,42 @@ p {
   /* background-color: #f5f5f5; */
   background-color: transparent;
   border: none;
+  border-radius: 50%;
 }
 
 .removeButton:hover {
   transform: scale(1.2);
   /* background-color: #8c8c8c; */
   transition: all 0.3s ease;
+  /* background-color: rgb(190, 190, 190); */
 }
 
 .listItem {
-  display: inline-block;
-  /* display: flex; */
+  /* display: inline-block; */
+  display: flex;
   align-items: center;
-  /* flex-direction: row; */
+  flex-direction: row;
   /* list-style: none; */
   /* color: #f2f2f2; */
-  color: (29, 29, 31);
+  /* color: (29, 29, 31); */
+  color: #252832;
   font-size: 1rem;
   /* padding-top: 5px;
   padding-right: 1rem; */
   /* padding-block: 7px; */
-  /* justify-content: space-between; */
-  width: 90%;
+  justify-content: space-between;
+  width: 100%;
   line-height: 1;
   /* border: 2px solid blue; */
   /* position: absolute; */
-  padding: 0.375rem;
+  padding: 0.5rem 1rem;
   /* padding-inline: 0.375rem; */
   /* padding-top: 5px; */
   /* padding-bottom: 5px; */
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #bdbdbd;
-  border-radius: 0.25rem;
+  border-radius: 25px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -434,27 +528,97 @@ button.askGoogle {
     margin-bottom: 1rem; */
   }
   .navbar {
+    position: fixed;
+    display: flex;
     height: 3rem;
+    width: 100%;
+    /* height: 100vh;  */
+    background-color: #707070;
+    opacity: 0.9;
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    gap: none;
+    justify-content: space-between;
+    padding: 30px;
   }
   .navbar_links {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 0 1rem;
-    gap: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* margin: 0 1rem; */
+    /* gap: none; */
+    width: 40%;
+    height: 100%;
+    background-color: black;
+    backdrop-filter: blur(5px);
+    position: fixed;
+    /* width: 300px;
+    height: 300px; */
+    top: 60px;
+    left: 0;
+    gap: 0;
+    /* z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; */
   }
 
   a {
+    color: #f5f5f5;
     font-size: 1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     text-decoration: none;
-    height: 50%;
+    height: fit-content;
+    margin: 10px;
   }
   a:hover {
     color: #262626;
     transition: all 0.3s ease;
+  }
+
+  /* .burgerBtn {
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+    position: relative;
+    cursor: pointer;
+  }
+  .burgerBtn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    background-color: black;
+    height: 2px;
+    width: 30px;
+    color: black;
+  }
+  .burgerBtn span {
+    content: "";
+    position: absolute;
+    top: 9px;
+    background-color: black;
+    height: 2px;
+    width: 30px;
+    color: black;
+  }
+
+  .burgerBtn:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+    height: 2px;
+    width: 30px;
+    color: black;
+  } */
+  .toggle-button {
+    display: flex;
   }
 
   h1 {
@@ -464,9 +628,9 @@ button.askGoogle {
     flex-direction: column;
     align-items: center;
   }
-  ul {
+  /* ul {
     border: 2px solid black;
-  }
+  } */
   .listItem {
     font-size: 1rem;
   }

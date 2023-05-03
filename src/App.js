@@ -6,10 +6,19 @@ import TodoContainer from "./components/TodoContainer";
 import Toggle from ".//components/Toggle.js";
 
 import style from "./components/TodoListItem.module.css";
+import { CgShoppingCart } from "react-icons/cg";
+import { CgBriefcase } from "react-icons/cg";
+import { CgUser } from "react-icons/cg";
+import { CgHeart } from "react-icons/cg";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const tableName = { table1: "My todo", table2: "Grocery", table3: "Work" };
+  const tableName = {
+    table1: "My todo",
+    table2: "Family",
+    table3: "Work",
+    table4: "Grocery",
+  };
   // const arrayTableNames = tableNames.map((tableName) => <div>{tableName}</div>);
 
   return (
@@ -17,10 +26,26 @@ function App() {
       <div className={style.wrapper}>
         <BrowserRouter>
           <div className={style.navbar}>
+            <div className={style.burgerBtn}>
+              <span />
+            </div>
             <div className={style.navbar_links}>
-              <Link to="/">{tableName.table1}</Link>
-              <Link to="/grocery">{tableName.table2}</Link>
-              <Link to="/work">{tableName.table3}</Link>
+              <Link to="/">
+                {tableName.table1}
+                <CgUser size="1.5rem" color="var(--color)" />
+              </Link>
+              <Link to="/family">
+                {tableName.table2}
+                <CgHeart size="1.5rem" color="var(--color)" />
+              </Link>
+              <Link to="/work">
+                {tableName.table3}
+                <CgBriefcase size="1.5rem" color="var(--color)" />
+              </Link>
+              <Link to="/grocery">
+                {tableName.table4}
+                <CgShoppingCart size="1.5rem" color="var(--color)" />
+              </Link>
             </div>
             <Toggle onSwitch={setIsDarkMode} />
           </div>
@@ -36,7 +61,7 @@ function App() {
               }
             ></Route>
             <Route
-              path="/grocery"
+              path="/family"
               element={
                 <TodoContainer
                   tableName={tableName.table2}
@@ -49,6 +74,15 @@ function App() {
               element={
                 <TodoContainer
                   tableName={tableName.table3}
+                  isDarkMode={isDarkMode}
+                />
+              }
+            ></Route>
+            <Route
+              path="/grocery"
+              element={
+                <TodoContainer
+                  tableName={tableName.table4}
                   isDarkMode={isDarkMode}
                 />
               }

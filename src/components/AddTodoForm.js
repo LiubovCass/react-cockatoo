@@ -18,7 +18,7 @@ const AddTodoForm = ({ onAddTodo }) => {
     // retrieve the input value from the event object and store in variable named newTodoTitle
 
     let newTodoTitle = event.target.value;
-    console.log(newTodoTitle);
+    // console.log(newTodoTitle);
     // call the state setter setTodoTitle and pass newTodoTitle
     setTodoTitle(newTodoTitle);
   }
@@ -38,7 +38,8 @@ const AddTodoForm = ({ onAddTodo }) => {
 
     // console.log(todoTitle);
 
-    onAddTodo({ title: todoTitle, id: Date.now() });
+    onAddTodo({ title: todoTitle, id: new Date() }); //Date.now()
+    // console.log(Date.UTC);
     setTodoTitle("");
     // Inside the handleAddTodo function, invoke the onAddTodo callback prop and pass todoTitle as an argument
   }
@@ -46,21 +47,43 @@ const AddTodoForm = ({ onAddTodo }) => {
   // Add value prop equal to todoTitle from component props */}
   /* Add onChange prop equal to handleTitleChange function reference (we will declare this function in the next step) */
   return (
-    <form onSubmit={handleAddTodo}>
-      <label className={style.label} htmlFor="todoTitle">
-        Title
-      </label>
-      <div className={style.inputGroupe}>
-        <InputWithLabel
-          todoTitle={todoTitle}
-          handleTitleChange={handleTitleChange}
-          children
-        ></InputWithLabel>
-        <button className={style.addButton} type="submit">
-          <RiAddFill size="1rem" color="#262626" />
-        </button>
-      </div>
-    </form>
+    <div className={style.addTodoForm}>
+      <form onSubmit={handleAddTodo}>
+        <div className={style.todo_field}>
+          <label className={style.label} htmlFor="todoTitle">
+            Title
+          </label>
+          {/* input with icon-button */}
+          {/* <div className={style.text_field}>
+          <label className={style.text_field__label} htmlFor="todoTitle">
+            Title
+          </label>
+          <div className={style.text_field__icon}>
+            <InputWithLabel
+              todoTitle={todoTitle}
+              handleTitleChange={handleTitleChange}
+              children
+            ></InputWithLabel>
+            <span className={style.text_field_aicon}>
+              <RiAddFill size="1rem" color="#262626" />
+            </span>
+          </div>
+        </div> */}
+          {/* input with attached button */}
+          <div className={style.inputGroupe}>
+            <InputWithLabel
+              todoTitle={todoTitle}
+              handleTitleChange={handleTitleChange}
+              children
+            ></InputWithLabel>
+
+            <button className={style.addButton} type="submit">
+              <RiAddFill size="1rem" color="#262626" />
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import style from "./TodoListItem.module.css";
 import PropTypes from "prop-types";
+import { FiMoon } from "react-icons/fi";
+import { FiSun } from "react-icons/fi";
 
 const Toggle = ({ onSwitch }) => {
   const [toggle, setToggle] = useState(false);
@@ -20,7 +22,7 @@ const Toggle = ({ onSwitch }) => {
         // className={toggle ? style["dark-theme"] : style["light-theme"]}
       >
         {/* {" "} */}
-        {toggle ? "Light mode" : "Dark Mode"}
+        {toggle ? <FiSun size="2rem" /> : <FiMoon size="2rem" />}
       </button>
     </div>
   );
