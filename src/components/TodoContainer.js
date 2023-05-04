@@ -29,7 +29,7 @@ import PropTypes from "prop-types";
 function TodoContainer(props) {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [ascending, setAscending] = useState(true);
+  // const [ascending, setAscending] = useState(true);
   //const [todos, setTodos] = useState([
   // { id: 1, Title: "todoList4", CreatedTime: "date4" },
   // { id: 2, Title: "todoList2", CreatedTime: "date2" },
@@ -75,7 +75,7 @@ function TodoContainer(props) {
         setIsLoading(false);
       })
       .catch((error) => console.error(error));
-  }, [API_ENDPOINT, ascending]);
+  }, [API_ENDPOINT]);
 
   useEffect(() => {
     if (isLoading === false) {
@@ -269,7 +269,7 @@ function TodoContainer(props) {
 
       <div className={style.todoListWithBtn}>
         {isLoading === true ? (
-          <p>Loading...</p>
+          <p className={style.isLoading}>Loading...</p>
         ) : todoList.length === 0 ? (
           <p>Nothing todo</p>
         ) : (
@@ -278,29 +278,31 @@ function TodoContainer(props) {
               <label className={style.label} htmlFor="ascending">
                 Sorting by
               </label>
-              {/* select Title / CreatedTime */}
-              <MySelect
-                value={OrderTitle}
-                // setSelectedSort={setSelectedSort}
-                // onChange={() => setAscending(!ascending)}
-                onChange={titleSort}
-                defaultValue="Title"
-                options={[
-                  { value: "ascending", name: "A-to-Z" },
-                  { value: "descending", name: "Z-to-A" },
-                ]}
-              />
+              <div className={style.sortGroup}>
+                {/* select Title / CreatedTime */}
+                <MySelect
+                  value={OrderTitle}
+                  // setSelectedSort={setSelectedSort}
+                  // onChange={() => setAscending(!ascending)}
+                  onChange={titleSort}
+                  defaultValue="Title"
+                  options={[
+                    { value: "ascending", name: "A-to-Z" },
+                    { value: "descending", name: "Z-to-A" },
+                  ]}
+                />
 
-              <MySelect
-                value={OrderCreatedTime}
-                // setSelectedSort={setSelectedSort}
-                onChange={createdTimeSort}
-                defaultValue="Created Time"
-                options={[
-                  { value: "descending", name: "Newest to Oldest" },
-                  { value: "ascending", name: "Oldest to Newest" },
-                ]}
-              />
+                <MySelect
+                  value={OrderCreatedTime}
+                  // setSelectedSort={setSelectedSort}
+                  onChange={createdTimeSort}
+                  defaultValue="Created Time"
+                  options={[
+                    { value: "descending", name: "Newest to Oldest" },
+                    { value: "ascending", name: "Oldest to Newest" },
+                  ]}
+                />
+              </div>
             </div>
             {/* <label htmlFor="switch">Switch ascending and descending</label>
             <input

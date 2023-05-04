@@ -22,7 +22,7 @@ const Toggle = ({ onSwitch }) => {
         // className={toggle ? style["dark-theme"] : style["light-theme"]}
       >
         {/* {" "} */}
-        {toggle ? <FiSun size="2rem" /> : <FiMoon size="2rem" />}
+        {toggle ? <FiSun size="1.5rem" /> : <FiMoon size="1.5rem" />}
       </button>
     </div>
   );

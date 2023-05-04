@@ -1,6 +1,5 @@
 import { React, useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-// import AskGoogle from ".//pages/AskGoogle";
 import TodoContainer from "./components/TodoContainer";
 // import MyNewToDoList from ".//pages/MyNewToDoList";
 import Toggle from ".//components/Toggle.js";
@@ -21,30 +20,53 @@ function App() {
   };
   // const arrayTableNames = tableNames.map((tableName) => <div>{tableName}</div>);
 
+  const [active, setActive] = useState(false);
+  // active = { navbarActive };
+  // setActive = { setNavbarActive };
+  //by default navbar hidden
+
   return (
     <>
       <div className={style.wrapper}>
         <BrowserRouter>
-          <div className={style.navbar}>
-            <div className={style.burgerBtn}>
+          <div
+            className={active ? style.navbar.active : style.navbar}
+            onClick={() => setActive(false)}
+          >
+            <div className={style.burgerBtn} onClick={() => setActive(!active)}>
               <span />
             </div>
-            <div className={style.navbar_links}>
+            <div
+              className={style.navbar_links}
+              onClick={(e) => e.stopPropagation()}
+            >
               <Link to="/">
                 {tableName.table1}
-                <CgUser size="1.5rem" color="var(--color)" />
+                <span className={style.navbar_icons}>
+                  <CgUser
+                    size="1.5rem"
+                    color="var(--color)"
+                    padding-left="1rem"
+                  />
+                </span>
               </Link>
               <Link to="/family">
                 {tableName.table2}
-                <CgHeart size="1.5rem" color="var(--color)" />
+                <span className={style.navbar_icons}>
+                  <CgHeart size="1.5rem" color="var(--color)" />
+                </span>
               </Link>
               <Link to="/work">
                 {tableName.table3}
-                <CgBriefcase size="1.5rem" color="var(--color)" />
+                <span className={style.navbar_icons}>
+                  <CgBriefcase size="1.5rem" color="var(--color)" />
+                </span>
               </Link>
               <Link to="/grocery">
                 {tableName.table4}
-                <CgShoppingCart size="1.5rem" color="var(--color)" />
+                <span className={style.navbar_icons}>
+                  <CgShoppingCart size="1.5rem" color="var(--color)" />
+                </span>
               </Link>
             </div>
             <Toggle onSwitch={setIsDarkMode} />

@@ -35,8 +35,10 @@ const AddTodoForm = ({ onAddTodo }) => {
 
     // let todoTitle = event.preventDefault();
     event.preventDefault();
-
-    // console.log(todoTitle);
+    if (todoTitle === "") {
+      // setErrorMessage('Todo cannot be empty');
+      return;
+    }
 
     onAddTodo({ title: todoTitle, id: new Date() }); //Date.now()
     // console.log(Date.UTC);
@@ -78,7 +80,7 @@ const AddTodoForm = ({ onAddTodo }) => {
             ></InputWithLabel>
 
             <button className={style.addButton} type="submit">
-              <RiAddFill size="1rem" color="#262626" />
+              <RiAddFill />
             </button>
           </div>
         </div>

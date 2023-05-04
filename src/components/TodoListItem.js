@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./TodoListItem.module.css";
 //import IconButton from "./IconButton";
 // import { FaTrashAlt } from "react-icons/fa";
@@ -6,9 +6,15 @@ import { CgTrash } from "react-icons/cg";
 
 import PropTypes from "prop-types";
 import Checkbox from "./Checkbox";
+import { format } from "date-fns";
 
 // update props to use destructuring
 const TodoListItem = ({ id, onRemoveTodo, title, todo }) => {
+  // const storedIsChecked = localStorage.getItem("isChecked");
+  const [isChecked, setIsChecked] = useState(
+    false
+    // storedIsChecked !== null ? JSON.parse(storedIsChecked) : false
+  );
   return (
     <>
       {/* <div className={style.todoListWithBtn}> */}
@@ -17,14 +23,16 @@ const TodoListItem = ({ id, onRemoveTodo, title, todo }) => {
       <ul className={style.todoListItemContainer}>
         <li className={style.listItem}>
           <div className={style.checkbox_wrapper}>
-            <div className={style.round}>
-              <Checkbox
-                label={""}
-                checked={true}
-                // selected={checked}
-              />
+            {/* <div className={style.round}> */}
+            <Checkbox
+              isChecked={isChecked}
+              setIsChecked={setIsChecked}
+              // label={""}
+              // checked={true}
+              // selected={checked}
+            />
 
-              {/* <label htmlFor="checkbox">
+            {/* <label htmlFor="checkbox">
               <input
                 type="checkbox"
                 id="checkbox"
@@ -32,18 +40,27 @@ const TodoListItem = ({ id, onRemoveTodo, title, todo }) => {
                 onChange={handleChange}
               />
             </label> */}
-            </div>
+            {/* </div> */}
           </div>
-          <div className={style.todoItemCreatedTime}>
+          <div
+            className={
+              isChecked
+                ? style.todoTitleCreatedTimeDone
+                : style.todoTitleCreatedTime
+            }
+          >
             {title} <br />
-            <span>{todo.createdTime}</span>
+            <span className={style.createdTime}>
+              {format(new Date(todo.createdTime), "MM/dd/yyyy HH:mm")}
+            </span>
           </div>
+
           <button
             className={style.removeButton}
             type="button"
             onClick={() => onRemoveTodo(id)}
           >
-            <CgTrash size="1.2rem" color="#252832" />
+            <CgTrash size="1.1rem" color="#252832" />
           </button>
         </li>
       </ul>

@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./TodoListItem.module.css";
 
 const MySelect = ({
   defaultValue,
@@ -13,7 +14,7 @@ const MySelect = ({
     // setSelectedSort(selectedTitleValue);
   };
   return (
-    <div>
+    <div className={style.mySelect}>
       <select value={value} onChange={handleSelectChange}>
         <option disabled value="">
           {defaultValue}

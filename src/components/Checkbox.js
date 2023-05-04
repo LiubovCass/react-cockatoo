@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import style from "./TodoListItem.module.css";
+// import style from "./Checkbox.module.css";
 
-const Checkbox = ({ label, checked, ...props }) => {
+const Checkbox = ({ isChecked, setIsChecked }) => {
   //   const defaultChecked = checked ? checked : false;
-  const [isChecked, setIsChecked] = useState(localStorage.getItem("false"));
 
-  useEffect(() => {
-    localStorage.setItem("false", isChecked);
-  }, [isChecked]);
-  const handleChecked = (event) => {
-    setIsChecked(event.target.value);
+  //   useEffect(() => {
+  //     localStorage.setItem("false", isChecked);
+  //   }, [isChecked]);
+
+  const handleChecked = () => {
+    setIsChecked(!isChecked);
+    // localStorage.setItem("isChecked", JSON.stringify(isChecked));
   };
+  //   const handleChecked = (event) => {
+  //     setIsChecked(event.target.value);
+  //   };
 
   //   const switchCheckbox = ({ onSwitchCheckbox }) => {
   //     const newIsChecked = !isChecked;
@@ -34,48 +39,84 @@ const Checkbox = ({ label, checked, ...props }) => {
   console.log(isChecked);
 
   return (
+    // <div>
+    //   {/* <div className={style["checkbox-wrapper"]}> */}
+    //   <input
+    //     type="checkbox"
+    //     id="checkbox-item"
+    //     name="check"
+    //     checked={isChecked}
+    //     onClick={handleChecked}
+    //   />
+    //   <label htmlFor="checkbox-item">
+    //     <span>{/*This span is needed to create the "checkbox" element*/}</span>
+    //     {/*Checkbox*/}
+    //   </label>
+    // </div>
+
     <div className={style.checkbox_wrapper}>
       <div className={style.round}>
-        <label>
-          {/* <label htmlFor="checkbox">{children}</label> */}
-          {/* <label> */}
+        <label htmlFor="checkbox" className={style.container}>
           <input
             type="checkbox"
-            checked={handleChecked}
-            onChange={() => setIsChecked((prev) => !prev)}
-            {...props}
-            className={isChecked ? "checked" : ""}
-            // value={selected}
-            //checked={checked}
-            //   onChange={isChecked ? background="#66bb6a"
-            //     .checkbox_wrapper.round input[type="checkbox"]:checked + label {
-            //       background-color: #66bb6a;
-            //       border-color: #66bb6a;
-            //     }
-
-            //     .checkbox_wrapper.round input[type="checkbox"]:checked + label:after {
-            //       opacity: 1;
-            //     }}
-            //   {isChecked? Если да то ${один css} : иначе ${второй css}}
+            id="checkbox-item"
+            onChange={handleChecked}
+            checked={isChecked}
           />
-          <span>{label}</span>
+          <span className={style.checkmark}></span>
+        </label>
+      </div>
+    </div>
+  );
+};
 
-          {/* const Checkbox = ({ label, value, onChange }) => {
+// <div className={style.checkbox_wrapper}>
+//   <div className={style.round}>
+//     <label>
+
+/* <label htmlFor="checkbox">{children}</label> */
+
+/* <label> */
+
+//   <input
+//     type="checkbox"
+//     checked={handleChecked}
+//     onChange={() => setIsChecked((prev) => !prev)}
+//     {...props}
+//     className={isChecked ? "checked" : ""}
+// value={selected}
+//checked={checked}
+//   onChange={isChecked ? background="#66bb6a"
+//     .checkbox_wrapper.round input[type="checkbox"]:checked + label {
+//       background-color: #66bb6a;
+//       border-color: #66bb6a;
+//     }
+
+//     .checkbox_wrapper.round input[type="checkbox"]:checked + label:after {
+//       opacity: 1;
+//     }}
+//   {isChecked? Если да то ${один css} : иначе ${второй css}}
+//   />
+//   <span>{label}</span>
+
+/* const Checkbox = ({ label, value, onChange }) => {
   return (
     <label>
       <input type="checkbox" checked={value} onChange={onChange} />
       {label}
     </label>
   );
-}; */}
+}; */
 
-          {/* {label} */}
-          {/* </label> */}
-        </label>
-      </div>
-    </div>
-  );
-};
+/* {label} */
+
+/* </label> */
+
+//         </label>
+//       </div>
+//     </div>
+//   );
+// };
 
 Checkbox.propTypes = {
   checked: PropTypes.bool,
