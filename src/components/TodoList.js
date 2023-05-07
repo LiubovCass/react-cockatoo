@@ -1,15 +1,13 @@
 import React from "react";
 import TodoListItem from "./TodoListItem";
 import PropTypes from "prop-types";
-
 // import style from "./TodoListItem.module.css";
 
-// Add props as a parameter to the TodoList functional component
+// Inside the map() method, use the TodoListItem component
+
 function TodoList({ onRemoveTodo, todoList }) {
   return (
-    // <ul className={style.todoList}>
     <>
-      {/* // <ul> */}
       {
         todoList.map(function (todo) {
           return (
@@ -22,11 +20,8 @@ function TodoList({ onRemoveTodo, todoList }) {
             />
           );
         })
-        //         Inside the map() method, use the TodoListItem component
-        //  Pass key as a prop equal to the id of the todo object
-        //  Pass todo as a prop
+        //    Inside the map() method, use the TodoListItem component
       }
-      {/* </ul> */}
     </>
   );
 }

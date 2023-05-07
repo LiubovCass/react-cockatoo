@@ -1,9 +1,7 @@
 import { React, useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import TodoContainer from "./components/TodoContainer";
-// import MyNewToDoList from ".//pages/MyNewToDoList";
 import Toggle from ".//components/Toggle.js";
-
 import style from "./components/TodoListItem.module.css";
 import { CgShoppingCart } from "react-icons/cg";
 import { CgBriefcase } from "react-icons/cg";
@@ -18,59 +16,64 @@ function App() {
     table3: "Work",
     table4: "Grocery",
   };
-  // const arrayTableNames = tableNames.map((tableName) => <div>{tableName}</div>);
 
-  const [active, setActive] = useState(false);
-  // active = { navbarActive };
-  // setActive = { setNavbarActive };
-  //by default navbar hidden
+  const [menuActive, setMenuActive] = useState(false);
 
   return (
     <>
       <div className={style.wrapper}>
         <BrowserRouter>
+          {/* <div className={menuActive ? style.navbar.active : style.navbar}> */}
+          {/* <div className={style.navbar}> */}
           <div
-            className={active ? style.navbar.active : style.navbar}
-            onClick={() => setActive(false)}
+            className={style.burgerBtn}
+            onClick={() => setMenuActive(!menuActive)}
           >
-            <div className={style.burgerBtn} onClick={() => setActive(!active)}>
-              <span />
-            </div>
-            <div
-              className={style.navbar_links}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Link to="/">
-                {tableName.table1}
-                <span className={style.navbar_icons}>
-                  <CgUser
-                    size="1.5rem"
-                    color="var(--color)"
-                    padding-left="1rem"
-                  />
-                </span>
-              </Link>
-              <Link to="/family">
-                {tableName.table2}
-                <span className={style.navbar_icons}>
-                  <CgHeart size="1.5rem" color="var(--color)" />
-                </span>
-              </Link>
-              <Link to="/work">
-                {tableName.table3}
-                <span className={style.navbar_icons}>
-                  <CgBriefcase size="1.5rem" color="var(--color)" />
-                </span>
-              </Link>
-              <Link to="/grocery">
-                {tableName.table4}
-                <span className={style.navbar_icons}>
-                  <CgShoppingCart size="1.5rem" color="var(--color)" />
-                </span>
-              </Link>
-            </div>
+            <span />
+          </div>
+
+          <div
+            // className={`${menuActive ? style.navbar.active : style.navbar}`}
+            className={`${style.burgerMenu_links} ${
+              menuActive ? style.burgerMenu.active : style.burgerMenu
+            }`}
+          >
+            {/* <div
+                className={style.navbar_links}
+                //  className={menuActive ? style.navbar_links_wrapper : ""}
+              > */}
+            <Link to="/">
+              {tableName.table1}
+              <span className={style.navbar_icons}>
+                <CgUser
+                  size="1.5rem"
+                  color="var(--color)"
+                  padding-left="1rem"
+                />
+              </span>
+            </Link>
+            <Link to="/family">
+              {tableName.table2}
+              <span className={style.navbar_icons}>
+                <CgHeart size="1.5rem" color="var(--color)" />
+              </span>
+            </Link>
+            <Link to="/work">
+              {tableName.table3}
+              <span className={style.navbar_icons}>
+                <CgBriefcase size="1.5rem" color="var(--color)" />
+              </span>
+            </Link>
+            <Link to="/grocery">
+              {tableName.table4}
+              <span className={style.navbar_icons}>
+                <CgShoppingCart size="1.5rem" color="var(--color)" />
+              </span>
+            </Link>
             <Toggle onSwitch={setIsDarkMode} />
           </div>
+          {/* </div> */}
+          {/* </div> */}
 
           <Routes>
             <Route
@@ -111,6 +114,13 @@ function App() {
             ></Route>
           </Routes>
         </BrowserRouter>
+        {/* <BurgerMenu
+          active={menuActive}
+          setActive={setMenuActive}
+          items={items}
+          value={tableName}
+          link={link}
+        /> */}
       </div>
     </>
   );

@@ -1,17 +1,14 @@
 import React from "react";
 import style from "./TodoListItem.module.css";
+import PropTypes from "prop-types";
 
-const MySelect = ({
-  defaultValue,
-  options,
-  value,
-  onChange,
-  // setSelectedSort,
-}) => {
+//sorting with <select/>
+const MySelect = ({ defaultValue, options, value, onChange }) => {
   const handleSelectChange = (event) => {
     onChange(event.target.value);
-    // let selectedTitleValue = event.target.value;
-    // setSelectedSort(selectedTitleValue);
+
+    console.log(typeof defaultValue);
+    console.log(typeof options);
   };
   return (
     <div className={style.mySelect}>
@@ -27,6 +24,13 @@ const MySelect = ({
       </select>
     </div>
   );
+};
+
+MySelect.propTypes = {
+  defaultValue: PropTypes.string,
+  options: PropTypes.array,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 export default MySelect;

@@ -1,0 +1,11 @@
+{
+  "folders": [
+	{
+		"path": "../.."
+	},
+	{
+		"path": "../../../RedRoverSchool/migration_to_ts"
+	}
+],
+  "settings": {}
+}

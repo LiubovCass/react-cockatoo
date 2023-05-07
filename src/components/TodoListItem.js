@@ -1,46 +1,20 @@
 import React, { useState } from "react";
 import style from "./TodoListItem.module.css";
-//import IconButton from "./IconButton";
-// import { FaTrashAlt } from "react-icons/fa";
 import { CgTrash } from "react-icons/cg";
-
 import PropTypes from "prop-types";
 import Checkbox from "./Checkbox";
 import { format } from "date-fns";
 
-// update props to use destructuring
 const TodoListItem = ({ id, onRemoveTodo, title, todo }) => {
-  // const storedIsChecked = localStorage.getItem("isChecked");
-  const [isChecked, setIsChecked] = useState(
-    false
-    // storedIsChecked !== null ? JSON.parse(storedIsChecked) : false
-  );
+  const [isChecked, setIsChecked] = useState(false);
   return (
     <>
-      {/* <div className={style.todoListWithBtn}> */}
-      {/* <ul className={style.todoListItemContainer}> */}
-
       <ul className={style.todoListItemContainer}>
         <li className={style.listItem}>
           <div className={style.checkbox_wrapper}>
-            {/* <div className={style.round}> */}
-            <Checkbox
-              isChecked={isChecked}
-              setIsChecked={setIsChecked}
-              // label={""}
-              // checked={true}
-              // selected={checked}
-            />
-
-            {/* <label htmlFor="checkbox">
-              <input
-                type="checkbox"
-                id="checkbox"
-                checked={checked}
-                onChange={handleChange}
-              />
-            </label> */}
-            {/* </div> */}
+            <label htmlFor="checkbox">
+              <Checkbox isChecked={isChecked} setIsChecked={setIsChecked} />
+            </label>
           </div>
           <div
             className={
@@ -57,14 +31,24 @@ const TodoListItem = ({ id, onRemoveTodo, title, todo }) => {
 
           <button
             className={style.removeButton}
+            aria-label="Remove"
             type="button"
             onClick={() => onRemoveTodo(id)}
           >
-            <CgTrash size="1.1rem" color="#252832" />
+            <span className={style.btnContrntWrap}>
+              <CgTrash
+                size="1.1rem"
+                color="#252832"
+                aria-hidden="true"
+                focusable="false"
+                aria-label="remove todo"
+              />
+              {/* <span class={style.visuallyHidden}>Trash Can</span> */}
+              {/* <VisuallyHidden>{label}</VisuallyHidden> */}
+            </span>
           </button>
         </li>
       </ul>
-      {/* </div> */}
     </>
   );
 };
@@ -73,6 +57,7 @@ TodoListItem.propTypes = {
   id: PropTypes.string,
   onRemoveTodo: PropTypes.func,
   title: PropTypes.string,
+  todo: PropTypes.object,
 };
 
 export default TodoListItem;
