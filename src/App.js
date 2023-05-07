@@ -23,8 +23,6 @@ function App() {
     <>
       <div className={style.wrapper}>
         <BrowserRouter>
-          {/* <div className={menuActive ? style.navbar.active : style.navbar}> */}
-          {/* <div className={style.navbar}> */}
           <div
             className={style.burgerBtn}
             onClick={() => setMenuActive(!menuActive)}
@@ -33,47 +31,36 @@ function App() {
           </div>
 
           <div
-            // className={`${menuActive ? style.navbar.active : style.navbar}`}
             className={`${style.burgerMenu_links} ${
               menuActive ? style.burgerMenu.active : style.burgerMenu
             }`}
           >
-            {/* <div
-                className={style.navbar_links}
-                //  className={menuActive ? style.navbar_links_wrapper : ""}
-              > */}
             <Link to="/">
               {tableName.table1}
               <span className={style.navbar_icons}>
-                <CgUser
-                  size="1.5rem"
-                  color="var(--color)"
-                  padding-left="1rem"
-                />
+                <CgUser />
               </span>
             </Link>
             <Link to="/family">
               {tableName.table2}
               <span className={style.navbar_icons}>
-                <CgHeart size="1.5rem" color="var(--color)" />
+                <CgHeart />
               </span>
             </Link>
             <Link to="/work">
               {tableName.table3}
               <span className={style.navbar_icons}>
-                <CgBriefcase size="1.5rem" color="var(--color)" />
+                <CgBriefcase />
               </span>
             </Link>
             <Link to="/grocery">
               {tableName.table4}
               <span className={style.navbar_icons}>
-                <CgShoppingCart size="1.5rem" color="var(--color)" />
+                <CgShoppingCart />
               </span>
             </Link>
             <Toggle onSwitch={setIsDarkMode} />
           </div>
-          {/* </div> */}
-          {/* </div> */}
 
           <Routes>
             <Route
@@ -114,13 +101,6 @@ function App() {
             ></Route>
           </Routes>
         </BrowserRouter>
-        {/* <BurgerMenu
-          active={menuActive}
-          setActive={setMenuActive}
-          items={items}
-          value={tableName}
-          link={link}
-        /> */}
       </div>
     </>
   );

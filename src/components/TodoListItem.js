@@ -37,14 +37,12 @@ const TodoListItem = ({ id, onRemoveTodo, title, todo }) => {
           >
             <span className={style.btnContrntWrap}>
               <CgTrash
-                size="1.1rem"
+                size="1.2rem"
                 color="#252832"
                 aria-hidden="true"
                 focusable="false"
                 aria-label="remove todo"
               />
-              {/* <span class={style.visuallyHidden}>Trash Can</span> */}
-              {/* <VisuallyHidden>{label}</VisuallyHidden> */}
             </span>
           </button>
         </li>

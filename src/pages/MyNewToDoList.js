@@ -1,11 +1,11 @@
-import React from "react";
+// import React from "react";
 
-const MyNewToDoList = (props) => {
-  return (
-    <div>
-      <h2>New Todo List</h2>
-    </div>
-  );
-};
+// const MyNewToDoList = (props) => {
+//   return (
+//     <div>
+//       <h2>New Todo List</h2>
+//     </div>
+//   );
+// };
 
-export default MyNewToDoList;
+// export default MyNewToDoList;
