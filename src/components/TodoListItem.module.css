@@ -300,7 +300,6 @@ select {
   min-width: 75%;
   padding-inline: 10px;
   text-align: left;
-  /* text-decoration: line-through; */
   font-weight: 100;
   color: #908f8f;
 }
@@ -488,17 +487,3 @@ select {
     width: auto;
   }
 }
-
-/* .navbar {
-  color: #252832;
-  background-color: transparent;
-  height: 5rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  text-decoration: none;
-  margin-left: 60px;
-  margin-right: 20px;
-  padding-top: 10px;
-} */
