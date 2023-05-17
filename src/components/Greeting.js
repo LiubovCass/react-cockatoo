@@ -11,11 +11,8 @@ const Greeting = () => {
   return (
     <div>
       <h3>{greet}</h3>
-      {/* <h3>Nice to see you!</h3> */}
     </div>
   );
-
-  //   const [greet, setGreet] = useState(" ")
 };
 
 Greeting.propTypes = {

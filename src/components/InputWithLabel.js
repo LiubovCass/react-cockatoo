@@ -11,7 +11,6 @@ function InputWithLabel({ todoTitle, handleTitleChange, children }) {
   useEffect(() => {
     inputRef.current.focus();
   });
-  // console.log(children);
 
   return (
     <>
@@ -24,7 +23,8 @@ function InputWithLabel({ todoTitle, handleTitleChange, children }) {
         placeholder="new todo"
         value={todoTitle}
         onChange={handleTitleChange}
-      ></input>
+        area-label="input new todo"
+      />
     </>
   );
 }
@@ -32,20 +32,6 @@ InputWithLabel.propTypes = {
   handleTitleChange: PropTypes.func,
   todoTitle: PropTypes.string,
   children: PropTypes.bool,
-  // children: PropTypes.node.isRequired,
 };
 
 export default InputWithLabel;
-
-// return (
-//     <form onSubmit={handleAddTodo}>
-//       <InputWithLabel
-//         todoTitle={todoTitle}
-//         handleTitleChange={handleTitleChange}
-//       >
-//         Title
-//       </InputWithLabel>
-
-//       <button type="submit">Add</button>
-//     </form>
-//   );

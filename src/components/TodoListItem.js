@@ -1,30 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./TodoListItem.module.css";
-//import IconButton from "./IconButton";
-import { FaTrashAlt } from "react-icons/fa";
+import { CgTrash } from "react-icons/cg";
 import PropTypes from "prop-types";
+import Checkbox from "./Checkbox";
+import { format } from "date-fns";
 
-// update props to use destructuring
 const TodoListItem = ({ id, onRemoveTodo, title, todo }) => {
+  const [isChecked, setIsChecked] = useState(false);
   return (
     <>
-      {/* <div className={style.todoListWithBtn}> */}
-      {/* <ul className={style.todoListItemContainer}> */}
-
-      <ul>
+      <ul className={style.todoListItemContainer}>
         <li className={style.listItem}>
-          {title} <br />
-          <span>{todo.createdTime}</span>
+          <div className={style.checkbox_wrapper}>
+            <label htmlFor="checkbox">
+              <Checkbox isChecked={isChecked} setIsChecked={setIsChecked} />
+            </label>
+          </div>
+          <div
+            className={
+              isChecked
+                ? style.todoTitleCreatedTimeDone
+                : style.todoTitleCreatedTime
+            }
+          >
+            {title} <br />
+            <span className={style.createdTime}>
+              {format(new Date(todo.createdTime), "MM/dd/yyyy HH:mm")}
+            </span>
+          </div>
+
+          <button
+            className={style.removeButton}
+            aria-label="Remove"
+            type="button"
+            onClick={() => onRemoveTodo(id)}
+          >
+            <span className={style.btnContrntWrap}>
+              <CgTrash
+                size="1.2rem"
+                color="#252832"
+                aria-hidden="true"
+                focusable="false"
+                aria-label="remove todo"
+              />
+            </span>
+          </button>
         </li>
-        <button
-          className={style.removeButton}
-          type="button"
-          onClick={() => onRemoveTodo(id)}
-        >
-          <FaTrashAlt size="1rem" color="var(--color)" />
-        </button>
       </ul>
-      {/* </div> */}
     </>
   );
 };
@@ -33,6 +55,7 @@ TodoListItem.propTypes = {
   id: PropTypes.string,
   onRemoveTodo: PropTypes.func,
   title: PropTypes.string,
+  todo: PropTypes.object,
 };
 
 export default TodoListItem;

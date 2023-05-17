@@ -3,45 +3,30 @@ import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 import style from "./TodoListItem.module.css";
 import Greeting from "./Greeting";
+import MySelect from "./MySelect";
 import PropTypes from "prop-types";
-// import ReactSwitch from "react-switch";
-// import ToggleSwitch from "./ToggleSwitch";
 
-// create custom hook
-// function useSemiPersistentState() {
-//   // Create new state variable named todoTitle with setter setTodoTitle
-//   const [todoList, setTodoList] = React.useState(
-//     JSON.parse(localStorage.getItem("savedTodoList")) || []
-//   );
-
-//   // Define a useEffect React hook with todoList as a dependency
-//   // Inside the side-effect handler function, save the todoList inside localStorage with the key "savedTodoList"
-//   // convert todoList to a string before saving in localStorage
-//   React.useEffect(() => {
-//     localStorage.setItem("savedTodoList", JSON.stringify(todoList));
-//   }, [todoList]);
-
-//   return [todoList, setTodoList];
-
-// }
-
-// const API_ENDPOINT = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/{props.tableName}/`;
-
-function TodoContainer(props) {
+function TodoContainer({ isDarkMode, tableName }) {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [ascending, setAscending] = useState(true);
 
-  const API_ENDPOINT = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${props.tableName}`;
+  // { id: 1, Title: "todoList4", CreatedTime: "date4" },
+  // { id: 2, Title: "todoList2", CreatedTime: "date2" },
+  // { id: 3, Title: "todoList1", CreatedTime: "date1" },
+  // { id: 4, Title: "todoList3", CreatedTime: "date3" },
+  // ]);
+
+  const API_ENDPOINT = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}`;
 
   useEffect(() => {
     fetch(
       `${API_ENDPOINT}`,
-      // ascending alphabetical order by "Title" (A-to-Z) API
+
+      //Sorting API
 
       // ?sort[0][field]=CreatedTime&sort[0][direction]=desc`,
       // `${API_ENDPOINT}?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`,
-
+      //GET request to API
       {
         method: "GET",
         headers: {
@@ -52,24 +37,11 @@ function TodoContainer(props) {
       .then((response) => response.json())
 
       .then((result) => {
-        // ascending alphabetical order by "Title" (A-to-Z) JS
-        ascending
-          ? result.records.sort((objectA, objactB) => {
-              if (objectA.fields.Title < objactB.fields.Title) return -1;
-              else if (objectA.fields.Title === objactB.fields.Title) return 0;
-              else return 1;
-            })
-          : result.records.sort((objectA, objactB) => {
-              if (objectA.fields.Title < objactB.fields.Title) return 1;
-              else if (objectA.fields.Title === objactB.fields.Title) return 0;
-              else return -1;
-            });
-
         setTodoList(result.records);
         setIsLoading(false);
       })
       .catch((error) => console.error(error));
-  }, [API_ENDPOINT, ascending]);
+  }, [API_ENDPOINT]);
 
   useEffect(() => {
     if (isLoading === false) {
@@ -77,18 +49,6 @@ function TodoContainer(props) {
     }
   }, [todoList, isLoading]);
 
-  // const [todoList, setTodoList] = useSemiPersistentState("");
-  // const [newTodo, setNewTodo] = React.useState("");
-  // react.useEffect(() => {});
-
-  // Remove the newTodo state variable and the corresponding JSX that displays it
-
-  // const [newTodo, setNewTodo] = React.useState("");
-  //   Inside the App functional component, above the return statement, create a new state variable named newTodo with update function named setNewTodo
-  // hint: useState hook
-
-  // Declare a new function named addTodo that takes newTodo as a parameter
-  //  Call the setTodoList state setter and use the spread operator to pass the existing Objects in the todoList Array along with the newTodo Object
   const addTodo = (newTodo) => {
     setIsLoading(true);
     fetch(`${API_ENDPOINT}`, {
@@ -119,7 +79,7 @@ function TodoContainer(props) {
       });
   };
 
-  //Delete items
+  //Delete items from API
 
   const removeTodo = (id) => {
     console.log(id);
@@ -140,57 +100,95 @@ function TodoContainer(props) {
         .catch((error) => console.error("error:", error));
     }
   };
-  //Sorting
+  //Sorting JS
 
-  // const [selectedSort, setSelectedSort] = useState("");
-  // const sortTodos = (sort) => {
-  // setSelectedSort(sort);
-  // console.log(ascending);
+  const titleSort = (order) => {
+    setOrderTitle(order);
+    sortTodos(order, "Title");
+  };
 
-  // ascending
-  //   ? todoList.sort((objectA, objactB) => {
-  //       if (objectA.fields[sort] < objactB.fields[sort]) return -1;
-  //       else if (objectA.fields[sort] === objactB.fields[sort]) return 0;
-  //       else return 1;
-  //     })
-  //   : todoList.sort((objectA, objactB) => {
-  //       if (objectA.fields[sort] < objactB.fields[sort]) return 1;
-  //       else if (objectA.fields[sort] === objactB.fields[sort]) return 0;
-  //       else return -1;
-  //     });
-  // ascending
-  // ? result.records.sort((objectA, objactB) => {
-  //     if (objectA.fields.Title < objactB.fields.Title) return -1;
-  //     else if (objectA.fields.Title === objactB.fields.Title) return 0;
-  //     else return 1;
-  //   })
-  // : result.records.sort((objectA, objactB) => {
-  //     if (objectA.fields.Title < objactB.fields.Title) return 1;
-  //     else if (objectA.fields.Title === objactB.fields.Title) return 0;
-  //     else return -1;
-  //   });
+  const createdTimeSort = (order) => {
+    setOrderCreatedTime(order);
+    sortTodos(order, "CreatedTime");
+  };
 
-  // setTodoList([...todoList].sort((a, b) => a[sort].localeCompare(b[sort])));
-  // console.log([...todoList].sort((a, b) => a[sort].localeCompare(b[sort])));
+  const [OrderTitle, setOrderTitle] = useState("");
+  const [OrderCreatedTime, setOrderCreatedTime] = useState("");
+
+  const sortTodos = (order, sort) => {
+    if (order === "ascending") {
+      todoList.sort((objectA, objectB) => {
+        if (
+          objectA.fields[sort].toLowerCase() <
+          objectB.fields[sort].toLowerCase()
+        )
+          return -1;
+        else if (
+          objectA.fields[sort].toLowerCase() ===
+          objectB.fields[sort].toLowerCase()
+        )
+          return 0;
+        else return 1;
+      });
+    } else {
+      todoList.sort((objectA, objectB) => {
+        if (
+          objectA.fields[sort].toLowerCase() <
+          objectB.fields[sort].toLowerCase()
+        )
+          return 1;
+        else if (
+          objectA.fields[sort].toLowerCase() ===
+          objectB.fields[sort].toLowerCase()
+        )
+          return 0;
+        else return -1;
+      });
+    }
+  };
 
   return (
-    <>
-      <div
-        className={`${style.mainContainer} ${
-          props.isDarkMode ? style["dark-theme"] : style["light-theme"]
-        }`}
-      >
-        <div className={style.todoInput}>
-          <div className={style.greeting}>
-            <Greeting />
-          </div>
-          <h1>{props.tableName}</h1>
-
-          <AddTodoForm onAddTodo={addTodo} />
-          {/* Pass setNewTodo as a callback handler prop named onAddTodo to the AddTodoForm component */}
-
-          {/* Pass todoList state as a prop named todoList to the TodoList component */}
+    <div
+      className={`${style.mainContainer} ${
+        isDarkMode ? style["dark-theme"] : style["light-theme"]
+      }`}
+    >
+      <div className={style.todoInput}>
+        <div className={style.greeting}>
+          <Greeting />
         </div>
+        <h1>{tableName}</h1>
+
+        <AddTodoForm onAddTodo={addTodo} />
+        <>
+          <div className={style.selectGroup}>
+            <label className={style.label} htmlFor="ascending">
+              Sorting by
+            </label>
+            <div className={style.sortGroup}>
+              {/* select Title / CreatedTime */}
+              <MySelect
+                value={OrderTitle}
+                onChange={titleSort}
+                defaultValue="Title"
+                options={[
+                  { value: "ascending", name: "A-to-Z" },
+                  { value: "descending", name: "Z-to-A" },
+                ]}
+              />
+
+              <MySelect
+                value={OrderCreatedTime}
+                onChange={createdTimeSort}
+                defaultValue="Created Time"
+                options={[
+                  { value: "descending", name: "Newest to Oldest" },
+                  { value: "ascending", name: "Oldest to Newest" },
+                ]}
+              />
+            </div>
+          </div>
+        </>
 
         <div className={style.todoListWithBtn}>
           {isLoading === true ? (
@@ -198,52 +196,17 @@ function TodoContainer(props) {
           ) : todoList.length === 0 ? (
             <p>Nothing todo</p>
           ) : (
-            <>
-              {/* <ToggleSwitch
-                id="switch"
-                type="checkbox"
-                checked={ascending}
-                onChange={() => setAscending(!ascending)}
-              /> */}
-
-              {/* onChange={handleChange}
-                 checked={checked}
-
-                 onChange={setAscending(!ascending)}
-                 onChange={(ascending) => setAscending(!ascending)}
-                 height="15px"
-                background
-                 onColor */}
-
-              <label className="switch" htmlFor="switch">
-                A-to-Z
-              </label>
-
-              <input
-                id="switch"
-                type="checkbox"
-                checked={ascending}
-                onChange={() => setAscending(!ascending)}
-              />
-
-              {/* label className="switch" htmlFor="switch"
-              Switch ascending and descending
-               <label></label>
-          
-              
-
-              {/* <span className="slider round"></span> */}
-              <TodoList onRemoveTodo={removeTodo} todoList={todoList} />
-            </>
+            <TodoList onRemoveTodo={removeTodo} todoList={todoList} />
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
 TodoContainer.propTypes = {
   isDarkMode: PropTypes.bool,
+  tableName: PropTypes.string,
 };
 
 export default TodoContainer;
